@@ -1,4 +1,12 @@
-pkgs: {
+pkgs:
+let
+  docker-dev = ''docker run --network host -it --init --privileged \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /opt/awlinux/src:/opt/awlinux/src \
+    -v (hg root):(pwd) \
+    containers.allworxcorp.com/jenkins/allworx-build-environment:0.22'';
+in
+{
   enable = true;
   loginShellInit = ''
     set -x EDITOR nvim
@@ -70,6 +78,7 @@ pkgs: {
     gro = "git restore";
     gsw = "git switch";
 
+    cdr = "cd (hg root)";
     h = "hg";
     ha = "hg add";
     hs = "hg status";
@@ -205,13 +214,13 @@ pkgs: {
       grep -v 'Jan  1 00:00' "$tmp/unsorted.txt" > "$tmp/last.txt"
       cat "$tmp/fist.txt" "$tmp/last.txt"
     '';
-    build-shell = ''docker run --network host -it --init --privileged -v /var/run/docker.sock:/var/run/docker.sock -v (hg root):(pwd) containers.allworxcorp.com/tools/build-environment:latest bash -c "cd $(hg root); exec bash"'';
-    # mk = ''docker run --network host -it --init --privileged -v /var/run/docker.sock:/var/run/docker.sock -v (hg root):(hg root) containers.allworxcorp.com/tools/build-environment:latest make -j16 -C (hg root) -f (hg root)/Allworx.mak $argv'';
-    # mkh = ''docker run --network host -it --init --privileged -v /var/run/docker.sock:/var/run/docker.sock -v (hg root):(hg root) containers.allworxcorp.com/tools/build-environment:latest make -j16 -C (hg root) -f (hg root)/Allworx.mak $argv awxn.desthost=localhost'';
+    build-shell = ''${docker-dev} bash -c "cd $(hg root); exec bash"'';
+    mk = ''${docker-dev} make -j16 -C (hg root) -f (hg root)/Allworx.mak $argv'';
+    mkh = ''${docker-dev} make -j16 -C (hg root) -f (hg root)/Allworx.mak $argv awxn.desthost=localhost'';
     # mk-orig = "make -j16 -f $(hg root)/Allworx.mak $argv";
     # mkh-orig = ''make -j16 -f $(hg root)/Allworx.mak $argv awxn.desthost=localhost'';
-    mk = "make -j16 -f $(hg root)/Allworx.mak $argv";
-    mkh = ''make -j16 -f $(hg root)/Allworx.mak $argv awxn.desthost=localhost'';
+    # mk = "make -j16 -f $(hg root)/Allworx.mak $argv";
+    # mkh = ''make -j16 -f $(hg root)/Allworx.mak $argv awxn.desthost=localhost'';
     upload-vserver = ''
       podman load -i BUILD_AREA/vserver/targets/vserver/awlinux/containers/vserver.tar
       podman tag localhost/vserver:latest containers.allworxcorp.com/ihyatt/vserver:latest
