@@ -68,6 +68,6 @@ require('gitsigns').setup {
 
     vim.keymap.set({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { buffer = buf })
 
-    require('plugins.which-key').register_git(buf)
+    require('keybinds').register_git(buf)
   end
 }

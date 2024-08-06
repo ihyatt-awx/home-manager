@@ -89,36 +89,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- Unmap Shift-Q, I hit it by accident and don't use that feature
-vim.api.nvim_set_keymap("n", "Q", "<NOP>", { noremap = true, silent = true })
-
--- Change buffer
-vim.keymap.set({ "n", "i" }, "<C-Left>", "<cmd>BufferLineCyclePrev<cr>")
-vim.keymap.set({ "n", "i" }, "<C-h>", "<cmd>BufferLineCyclePrev<cr>")
-vim.keymap.set({ "n", "i" }, "<C-Right>", "<cmd>BufferLineCycleNext<cr>")
-vim.keymap.set({ "n", "i" }, "<C-l>", "<cmd>BufferLineCycleNext<cr>")
-
--- Reorder buffers
-vim.keymap.set({ "n", "i" }, "<C-,>", "<cmd>BufferLineMovePrev<cr>")
-vim.keymap.set({ "n", "i" }, "<C-.>", "<cmd>BufferLineMoveNext<cr>")
-
--- Move selected lines up or down in various modes
--- https://vim.fandom.com/wiki/Moving_lines_up_or_down
-vim.keymap.set("n", "<M-j>", ":m .+1<cr>==")
-vim.keymap.set("n", "<M-k>", ":m .-2<cr>==")
-vim.keymap.set("i", "<M-j>", "<esc>:m .+1<cr>==gi")
-vim.keymap.set("i", "<M-k>", "<esc>:m .-2<cr>==gi")
-vim.keymap.set("v", "<M-j>", ":m '>+1<cr>gv=gv")
-vim.keymap.set("v", "<M-k>", ":m '<-2<cr>gv=gv")
-
--- Better indenting
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
-
--- ReplaceWithRegister keybginds
-vim.keymap.set("n", "<leader>r", "<Plug>ReplaceWithRegisterOperator")
-vim.keymap.set("n", "<leader>rr", "<Plug>ReplaceWithRegisterLine")
-vim.keymap.set("x", "<leader>r", "<Plug>ReplaceWithRegisterVisual")
+require('keybinds')
 
 vim.cmd([[
   " SpellBad underline
@@ -149,7 +120,10 @@ require("neodev").setup({
 require('crates').setup()
 require('plugins.lsp')
 
-require('plugins.which-key')
+-- require('plugins.which-key')
+require('which-key').setup {
+  preset = "modern",
+}
 
 require('nvim-autopairs').setup()
 require("nvim-surround").setup()

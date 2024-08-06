@@ -161,5 +161,13 @@ function M.get_buf_option(opt)
   end
 end
 
+-- Add all of the items in t2 to t1
+function M.tconcat(t1, t2)
+	for k,v in pairs(t2) do
+		t1[k] = v
+	end
+	return t1
+end
+
 return M
 

@@ -1,5 +1,7 @@
 local lspconfig = require('lspconfig')
 local navic = require("nvim-navic")
+local keybinds = require('keybinds')
+local utils = require('utils')
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
@@ -64,9 +66,9 @@ for _, lsp in ipairs(server) do
   }
 end
 
-local function lsp_keybinds(buf, overrides, whichkey_overrides)
+local function lsp_keybinds(buf, overrides, leader_l_overrides)
   overrides = overrides or {}
-  whichkey_overrides = whichkey_overrides or {}
+  leader_l_overrides = leader_l_overrides or {}
   local bindings = { -- defaults
     ["[d"] = vim.diagnostic.goto_prev,
     ["]d"] = vim.diagnostic.get_next,
@@ -77,12 +79,9 @@ local function lsp_keybinds(buf, overrides, whichkey_overrides)
     gr = vim.lsp.buf.references,
     ["<C-k>"] = vim.lsp.buf.signature_help,
   }
-  for k, v in pairs(overrides) do bindings[k] = v end
-  local opts = { buffer = buf }
-  for k, v in pairs(bindings) do
-    vim.keymap.set("n", k, v, opts)
-  end
-  require('plugins.which-key').register_lsp(buf, whichkey_overrides)
+  utils.tconcat(bindings, overrides)
+  keybinds.bind(bindings, { buffer = buf })
+  keybinds.register_lsp(buf, leader_l_overrides)
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -108,7 +107,7 @@ vim.g.rustaceanvim = {
       local addtional_binds = {
         gp = "<cmd>RustLsp parentModule<cr>",
       }
-      local additonal_whichkey_binds = {
+      local additonal_leader_l_binds = {
         a = { "<cmd>RustLsp codeAction<cr>", "Code Action" },
         R = { "<cmd>RustLsp runnables<cr>", "Runnables" },
         T = { "<cmd>RustLsp testables<cr>", "Testables" },
@@ -119,7 +118,7 @@ vim.g.rustaceanvim = {
         L = { "<cmd>RustLsp explainError<cr>", "Explain Error" },
         H = { "<cmd>RustLsp hover actions<cr>", "Hover Actions" },
       }
-      lsp_keybinds(buf, addtional_binds, additonal_whichkey_binds)
+      lsp_keybinds(buf, addtional_binds, additonal_leader_l_binds)
     end,
     default_settings = {
       -- rust-analyzer language server configuration
@@ -142,10 +141,10 @@ vim.g.haskell_tools = {
     on_attach = function (_, buf, ht)
       local addtional_binds = {
       }
-      local additonal_whichkey_binds = {
+      local additonal_leader_l_binds = {
         h = { ht.hoogle.hoogle_signature, "Hoogle Signature" }
       }
-      lsp_keybinds(buf, addtional_binds, additonal_whichkey_binds)
+      lsp_keybinds(buf, addtional_binds, additonal_leader_l_binds)
     end
   }
 }
