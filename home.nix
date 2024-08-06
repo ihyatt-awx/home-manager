@@ -54,18 +54,7 @@
     tftp-hpa
     yq
     docker-credential-helpers
-  ] ++ (with pkgs.gnome; with pkgs.gnomeExtensions; [
-    # Gnome apps and shell extensions
-    gnome-tweaks
-    dconf-editor
-    rounded-window-corners
-    appindicator
-    gsconnect
-    caffeine
-    app-icons-taskbar
-    pano
-    gnome-boxes
-  ]);
+  ];
 
   # Configure my programs
   programs.fzf = {
