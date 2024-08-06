@@ -123,7 +123,11 @@ wk.register({
     },
     S = { "<cmd>lua require('spectre').open()<CR>", "Find & Replace" },
   },
-  t = { "<cmd>TextCaseOpenTelescope<cr>", "Change Text Case" },
+  t = {
+    name = "Text Manipulation",
+    c = { "<cmd>TextCaseOpenTelescope<cr>", "Change Text Case" },
+    i = { "viw<cmd>B !sed 's/0x//' | sed 's/../0x& /g' | tr ' ' '\n' | tac | tr '\n' ' ' | xargs printf '%d.%d.%d.%d\n'" , "Hex to IP"}
+  },
   g = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", "Live Grep" },
 }, {
   mode = "n",    -- NORMAL mode
