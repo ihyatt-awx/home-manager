@@ -1,0 +1,4 @@
+inherits = "tokyonight"
+
+"ui.cursor" = { fg = "fg", modifiers = ["reversed"] }
+"ui.cursor.primary" = { modifiers = ["reversed"] }

@@ -1,0 +1,13 @@
+theme = "tokyonightfix"
+
+[editor]
+bufferline = "multiple"
+
+[editor.cursor-shape]
+insert = "bar"
+
+[keys.normal]
+C-h = "goto_previous_buffer"
+C-left = "goto_previous_buffer"
+C-l = "goto_next_buffer"
+C-right = "goto_next_buffer"
