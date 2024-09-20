@@ -5,7 +5,7 @@ local utils = require('utils')
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local server = { "pyright", "tsserver", "bashls", "lua_ls", "nil_ls",
+local server = { "pyright", "ts_ls", "bashls", "lua_ls", "nil_ls",
   "html", "jsonls", "yamlls", "ltex", "clangd" }
 
 local excluded_fts = { "rust", "haskell" }

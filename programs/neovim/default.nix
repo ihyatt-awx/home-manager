@@ -110,6 +110,7 @@ in
     lua-language-server
     nil
     yaml-language-server
+    typescript-language-server
     vscode-langservers-extracted
     ltex-ls
     imagemagick
