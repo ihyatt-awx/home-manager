@@ -56,6 +56,7 @@ in
 
     # Editing
     nvim-autopairs
+    nvim-ts-autotag
     nvim-ts-context-commentstring
     comment-nvim
     nvim-surround
@@ -117,6 +118,9 @@ in
     # ccls
     pyright
     clang-tools
+    sqls
+    dockerfile-language-server-nodejs
+    docker-compose-language-service
   ];
   extraLuaPackages = ps: [ ps.magick ];
 }

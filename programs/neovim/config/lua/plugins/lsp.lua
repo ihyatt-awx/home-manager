@@ -6,7 +6,8 @@ local utils = require('utils')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local server = { "pyright", "ts_ls", "bashls", "lua_ls", "nil_ls",
-  "html", "jsonls", "yamlls", "ltex", "clangd" }
+  "html", "jsonls", "yamlls", "ltex", "clangd", "sqls", "cssls",
+  "docker_compose_language_service", "dockerls"}
 
 local excluded_fts = { "rust", "haskell" }
 
@@ -49,6 +50,16 @@ local settings = {
     ltex = {
       language = "en-US",
       enabled = { "bibtex", "gitcommit", "markdown", "org", "tex", "restructuredtext", "rsweave", "latex", "quarto", "rmd", "context", "text" },
+    }
+  },
+  sqls = {
+    sqls = {
+      connections = {
+        {
+          driver = 'postgresql',
+          dataSourceName = 'host=127.0.0.1 port=5432 user=fms password=1234567 dbname=fms sslmode=disable'
+        }
+      }
     }
   },
 }

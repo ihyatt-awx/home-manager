@@ -126,6 +126,7 @@ require('which-key').setup {
 }
 
 require('nvim-autopairs').setup()
+require('nvim-ts-autotag').setup()
 require("nvim-surround").setup()
 require('guess-indent').setup()
 

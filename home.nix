@@ -52,6 +52,7 @@
     yq
     docker-credential-helpers
     bear
+    postgresql
   ];
 
   # Configure my programs
