@@ -66,7 +66,7 @@ for k, v in pairs(opts) do
 end
 
 -- Two space for some langs
-utils.ftcmd({ "lua", "hs", "html", "css", "json", "nix" }, function()
+utils.ftcmd({ "lua", "hs", "html", "css", "json", "nix", "ts", "tsx" }, function()
   vim.opt.tabstop = 2
   vim.opt.shiftwidth = 2
 end)
