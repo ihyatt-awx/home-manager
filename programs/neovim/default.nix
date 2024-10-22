@@ -83,6 +83,7 @@ in
     nvim-lightbulb
     popup-nvim
     image-nvim
+    tailwind-tools-nvim
 
     # Utils
     telescope-nvim
@@ -121,6 +122,7 @@ in
     sqls
     dockerfile-language-server-nodejs
     docker-compose-language-service
+    tailwindcss-language-server
   ];
   extraLuaPackages = ps: [ ps.magick ];
 }

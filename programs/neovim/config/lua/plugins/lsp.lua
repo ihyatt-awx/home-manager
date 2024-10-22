@@ -7,7 +7,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local server = { "pyright", "ts_ls", "bashls", "lua_ls", "nil_ls",
   "html", "jsonls", "yamlls", "ltex", "clangd", "sqls", "cssls",
-  "docker_compose_language_service", "dockerls"}
+  "docker_compose_language_service", "dockerls", "tailwindcss"}
 
 local excluded_fts = { "rust", "haskell" }
 

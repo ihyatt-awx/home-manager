@@ -166,3 +166,4 @@ require('textcase').setup {
 }
 require('telescope').load_extension('textcase')
 require('kitty-scrollback').setup()
+require("tailwind-tools").setup()
