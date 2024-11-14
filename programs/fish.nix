@@ -62,6 +62,7 @@ in
     gca = "git commit --amend";
 		gcl = "git clone";
     gd = "git diff";
+    gds = "git diff --staged";
     gf = "git fetch";
     gl = "git log";
     gm = "git merge";
@@ -78,7 +79,6 @@ in
     gro = "git restore";
     gsw = "git switch";
 
-    cdr = "cd (hg root)";
     h = "hg";
     ha = "hg add";
     hs = "hg status";
@@ -223,6 +223,7 @@ in
     mk = ''${docker-dev} make -j16 -C (hg root) -f (hg root)/Allworx.mak $argv'';
     mkh = ''${docker-dev} make -j16 -C (hg root) -f (hg root)/Allworx.mak $argv awxn.desthost=localhost'';
     mkmake = ''${docker-dev} make -C (hg root) $argv'';
+    mkb = ''${docker-dev} bear --append --config (hg root)/bear-config.json --output (hg root)/compile_commands.json -- make -j16 -C (hg root) -f (hg root)/Allworx.mak $argv awxn.desthost=localhost'';
     # mk-orig = "make -j16 -f $(hg root)/Allworx.mak $argv";
     # mkh-orig = ''make -j16 -f $(hg root)/Allworx.mak $argv awxn.desthost=localhost'';
     # mk = "make -j16 -f $(hg root)/Allworx.mak $argv";
@@ -254,6 +255,13 @@ in
       podman load -i BUILD_AREA/vserver/targets/vserver/awlinux/containers/vserver.tar
       podman run -it localhost/vserver:latest bash
       '';
+    cdr = ''
+      if set DIR (hg root 2> /dev/null)
+        cd $DIR
+      else if set DIR (git rev-parse --show-toplevel 2> /dev/null)
+        cd $DIR
+      end
+    '';
 
     pssh = ''
       ${pkgs.openssh}/bin/ssh -i ~/.ssh/devmode -o StrictHostKeyChecking=no "root@192.168.5.$argv[1]"
