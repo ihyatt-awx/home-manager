@@ -12,7 +12,7 @@ in
   loginShellInit = ''
     set -x EDITOR nvim
     set -x LIBVIRT_DEFAULT_URI "qemu:///system"
-    fish_add_path "~/.local/bin"
+    fish_add_path ~/.local/bin
     fish_add_path ~/.local/bin/scripts
     fish_add_path /var/lib/flatpak/exports/bin
     fish_add_path ~/.cargo/bin
@@ -102,6 +102,7 @@ in
     la = "eza -a";
     ll = "eza -l";
     lla = "eza -al";
+    lnw = "eza --sort accessed -r";
     scratch = "nvim /tmp/scratch.txt";
     ssh = "kitty +kitten ssh";
     bssh = "${pkgs.openssh}/bin/ssh";

@@ -9,7 +9,7 @@
    # installing my packages uvu
   home.packages = with pkgs; [
     # CLI utilities
-    (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+    nerd-fonts.symbols-only
     btop
     fd
     ripgrep
@@ -53,6 +53,7 @@
     docker-credential-helpers
     bear
     postgresql
+    # toolong
   ];
 
   # Configure my programs
@@ -62,6 +63,7 @@
   };
   programs.gpg.enable = true;
   programs.jq.enable = true;
+  programs.nix-your-shell.enable = true;
   programs.kitty = import programs/kitty.nix pkgs;
   programs.starship = import programs/starship.nix lib;
   programs.fish = import programs/fish.nix pkgs;
